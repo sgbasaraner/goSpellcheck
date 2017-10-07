@@ -33,7 +33,7 @@ func main() {
 	argLength := len(args)
 
 	if argLength > 4 || argLength < 3 || (argLength == 4 && args[3] != "lean") {
-		fmt.Println("Usage: spellcheck text dictionary [lean]")
+		fmt.Println("Usage: $ ./spellcheck text dictionary [lean]")
 		os.Exit(2)
 	}
 
