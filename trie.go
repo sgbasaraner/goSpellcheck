@@ -15,29 +15,48 @@ func (n *trieNode) AddChild(l byte) *trieNode {
 }
 
 func (n *trieNode) PrintChildren() {
-	fmt.Println(len(n.children))
 	for i := 0; i < len(n.children); i++ {
-		fmt.Printf(string(n.children[i].label))
+		fmt.Println(string(n.children[i].label))
 	}
 }
 
-func (n *trieNode) HasChild(l byte) bool {
+func (n *trieNode) HasChild(l byte) *trieNode {
 	for i := 0; i < len(n.children); i++ {
 		if l == n.children[i].label {
-			return true
+			return (n.children[i])
 		}
 	}
-	return false
+	return nil
 }
 
 func (n *trieNode) AddWord(word string) {
 	cursor := n
 	for i := 0; i < len(word); i++ {
-		if !(cursor.HasChild(byte(word[i]))) {
-			fmt.Println(word[i])
+		if cursor.HasChild(byte(word[i])) == nil {
+			// fmt.Println("cursor is:", cursor.label)
 			cursor = cursor.AddChild(byte(word[i]))
+		} else {
+			cursor = cursor.HasChild(byte(word[i]))
 		}
 	}
 	// tilde indicates end of the word
 	cursor.AddChild(byte('~'))
+}
+
+func (n *trieNode) Search(word string) bool {
+	cursor := n
+	for i := 0; i < len(word); i++ {
+		// cursor.PrintChildren()
+		if cursor.HasChild(byte(word[i])) != nil {
+			cursor = cursor.HasChild(byte(word[i]))
+		} else {
+			return false
+		}
+	}
+
+	if cursor.HasChild(byte('~')) != nil {
+		return true
+	} else {
+		return false
+	}
 }
