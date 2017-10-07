@@ -7,6 +7,7 @@ import "regexp"
 import "strings"
 
 var lean bool = false
+const longestWord int = 45
 
 func checkError (e error) {
 	if e != nil {
@@ -88,7 +89,7 @@ func main() {
 
 			word = strings.TrimSpace(word)
 			// ignore too long words
-			if !match && len(word) <= 45{
+			if !match && len(word) <= longestWord{
 				if !check(word) && word != ""{
 					fmt.Println(word)
 					misspellings += 1
