@@ -2,7 +2,6 @@ package main
 
 import "os"
 import "fmt"
-import "io/ioutil"
 
 func check (e error) {
 	if e != nil {
@@ -18,7 +17,11 @@ func main() {
 		fmt.Println("Usage: spellcheck [dictionary] text")
 	}
 
-	dat, err := ioutil.ReadFile(args[1])
-	check(err)
-	fmt.Print(string(dat))
+	var dictionary string
+
+	if len(args) != 3 {
+		dictionary = "dictionaries/large"
+	} else {
+		dictionary = string(args[2])
+	}
 }
