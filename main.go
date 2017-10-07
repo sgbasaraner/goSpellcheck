@@ -3,7 +3,7 @@ package main
 import "os"
 import "fmt"
 
-func check (e error) {
+func checkError (e error) {
 	if e != nil {
 		panic(e)
 	}
@@ -23,5 +23,10 @@ func main() {
 		dictionary = "dictionaries/large"
 	} else {
 		dictionary = string(args[2])
+	}
+
+	var loaded bool = load(dictionary)
+	if loaded {
+		fmt.Println("loaded!")
 	}
 }
