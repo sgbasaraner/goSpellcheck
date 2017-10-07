@@ -6,8 +6,7 @@ func check(word string) bool {
 
 func load(dictionary string) bool {
 	root := &(trieNode{label: 0})
-	root.AddChild(byte('a'))
-	root.PrintChildren()
+	root.AddWord("araba")
 	return true
 }
 

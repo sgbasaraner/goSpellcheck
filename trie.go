@@ -31,7 +31,7 @@ func (n *trieNode) HasChild(l byte) bool {
 }
 
 func (n *trieNode) AddWord(word string) {
-	cursor := root
+	cursor := n
 	for i := 0; i < len(word); i++ {
 		if !(cursor.HasChild(byte(word[i]))) {
 			fmt.Println(word[i])
