@@ -1,23 +1,31 @@
 package main
-import "fmt"
+import "bufio"
+import "os"
+import "strings"
+
+var words int = 0
+var root *trieNode = &(trieNode{0, nil})
 
 func check(word string) bool {
-	return true	
+	return root.Search(strings.ToLower(word))	
 }
 
 func load(dictionary string) bool {
-	root := &(trieNode{label: 0})
-	root.AddWord("araba")
-	if root.Search("araba") {
-		fmt.Println("araba exists")
+	text, err := os.Open(dictionary)
+	checkError(err)
+	scanner := bufio.NewScanner(text)
+	scanner.Split(bufio.ScanWords)
+
+	for scanner.Scan() {
+		line := scanner.Text()
+		words += 1
+		root.AddWord(line)
 	}
-	// if root.Search("arap") {
-	// 	fmt.Println("arap exists")
-	// }
+
 	return true
 }
 
 func size() int {
-	return 0
+	return words
 }
 
