@@ -30,12 +30,14 @@ func (n *trieNode) HasChild(l byte) bool {
 	return false
 }
 
-func (n *trieNode) AddWord(root *trieNode, word string) {
+func (n *trieNode) AddWord(word string) {
 	cursor := root
 	for i := 0; i < len(word); i++ {
 		if !(cursor.HasChild(byte(word[i]))) {
+			fmt.Println(word[i])
 			cursor = cursor.AddChild(byte(word[i]))
 		}
 	}
+	// tilde indicates end of the word
 	cursor.AddChild(byte('~'))
 }
