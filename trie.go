@@ -20,3 +20,22 @@ func (n *trieNode) PrintChildren() {
 		fmt.Printf(string(n.children[i].label))
 	}
 }
+
+func (n *trieNode) HasChild(l byte) bool {
+	for i := 0; i < len(n.children); i++ {
+		if l == n.children[i].label {
+			return true
+		}
+	}
+	return false
+}
+
+func (n *trieNode) AddWord(root *trieNode, word string) {
+	cursor := root
+	for i := 0; i < len(word); i++ {
+		if !(cursor.HasChild(byte(word[i]))) {
+			cursor = cursor.AddChild(byte(word[i]))
+		}
+	}
+	cursor.AddChild(byte('~'))
+}
