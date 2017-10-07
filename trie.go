@@ -7,10 +7,11 @@ type trieNode struct {
 	children 	[]*trieNode
 }
 
-func (n *trieNode) AddChild(l byte) {
+func (n *trieNode) AddChild(l byte) *trieNode {
 	node := trieNode{l, nil}
 	np := &node
 	n.children = append(n.children, np)
+	return np
 }
 
 func (n *trieNode) PrintChildren() {
